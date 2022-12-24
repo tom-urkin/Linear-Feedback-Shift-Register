@@ -13,7 +13,7 @@ logic [LENGTH-1:0] data;
 //integer k;
 
 //Fibonacci LFSR instantiation
-Fibonacci_LFSR #(.LENGTH(LENGTH), .TAPS(TAPS)) U1(
+Fibonacci_LFSR #(.LENGTH(LENGTH), .TAPS(TAPS), .TYPE(0)) U1(
                 .clk(clk),
                 .rst(rst),
                 .seed(16'd1),

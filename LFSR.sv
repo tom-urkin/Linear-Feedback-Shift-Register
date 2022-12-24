@@ -1,31 +1,42 @@
 //Fibonacci Linear Feedback Shift Register (LFSR)
 
-module Fibonacci_LFSR(rst,clk,seed,data);
+module LFSR(rst,clk,seed,data);
 
 //Parameter declerations
-parameter LENGTH=16; 								//LFSR length
-parameter TAPS=53256;								//TAP locations not including the XOR operation with the right-most bit. Deafutls is the polynomial for maximal 16-bit LFSR 
+parameter TYPE = 0;                                     //LFSR type: 0 for Fibonacci and 1 for Galois
+parameter LENGTH=16;                                    //LFSR structure: [0][1][2]--->[LENGTH]
+parameter TAPS=16'b011010000000001;                     //TAP locations. Deafutls is the polynomial for maximal 16-bit LFSR 
 
 //Inputs
-input logic rst;                            //Active high logic
-input logic clk;                            //Input clock
-input logic [LENGTH-1:0] seed;              //Input seed - the initial state of the LFSR
+input logic rst;                                        //Active high logic
+input logic clk;                                        //Input clock
+input logic [0:LENGTH-1] seed;                          //Input seed - the initial state of the LFSR
 integer k;
 //Outputs
-output logic [LENGTH-1:0] data;             //This is the output word
+output logic [0:LENGTH-1] data;                         //This is the output word
 
 //Internal signals
-logic feedback_bit;                         //Input to the leftmost flip-flop
+logic feedback_bit;                                     //Input to the leftmost flip-flop
+
+//Conditional compilation
+`define LFSR_Arch = TYPE;                               //Defining 
 //HDL code
 
-//Shift register
-always @(posedge clk or negedge rst)
-    if (!rst)
-        data<=seed;
-    else
-        data<={feedback_bit,data[LENGTH-1:1]};
+`ifdef (LFSR_Arch==0)                                   //Fibonacci LFSR
+begin
+    //Shift register
+    always @(posedge clk or negedge rst)
+        if (!rst)
+            data<=seed;
+        else
+            data<={feedback_bit,data[1:LENGTH-1]};
 
-//Calculating the feedback bit
-assign feedback_bit = ^{(TAPS[LENGTH-1:0]&data),data[0]};
-
+    //Calculating the feedback bit
+    assign feedback_bit = ^(TAPS&data);
+end
+`else                                                   //Galois LFSR
+begin
+    assign data = 16'd15;
+end
 endmodule 
+
