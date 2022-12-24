@@ -1,19 +1,21 @@
 `timescale 1ns/100ps
 //
-module Fibonacci_LFSR_TB();
-
+module LFSR_TB();
 //Parameter declarations
 parameter CLK_PERIOD = 20;
 parameter LENGTH = 16;                        //Word width
-parameter TAPS = 53256;
+parameter TAPS_FIBONACCI = 16'b0110100000000001;		  //[0][1][2]----[15]
+parameter TAPS_GALOIS = 16'b0110100000000000;		  //[0][1][2]----[15]
+parameter FIBONACCI = 0;
+parameter GALOIS = 1;
 //Internal signals declarations
 logic clk;
 logic rst;
-logic [LENGTH-1:0] data;
+logic [0:LENGTH-1] data;
 //integer k;
 
 //Fibonacci LFSR instantiation
-Fibonacci_LFSR #(.LENGTH(LENGTH), .TAPS(TAPS), .TYPE(0)) U1(
+LFSR #(.LENGTH(LENGTH), .TAPS(TAPS_GALOIS), .TYPE(GALOIS)) U1(
                 .clk(clk),
                 .rst(rst),
                 .seed(16'd1),

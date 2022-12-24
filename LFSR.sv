@@ -3,10 +3,10 @@
 module LFSR(rst,clk,seed,data);
 
 //Parameter declerations
-parameter TYPE = 0;                                     //LFSR type: 0 for Fibonacci and 1 for Galois
+parameter TYPE = 1;                                     //LFSR type: 0 for Fibonacci and 1 for Galois
 parameter LENGTH=16;                                    //LFSR structure: [0][1][2]--->[LENGTH]
-parameter TAPS=16'b011010000000001;                     //TAP locations. Deafutls is the polynomial for maximal 16-bit LFSR 
-
+//parameter TAPS=16'b0110100000000001;                  //TAP locations. Deafutls is the polynomial for maximal 16-bit LFSR 
+parameter TAPS=16'b0110100000000000; 						  //TAP locations for Galios
 //Inputs
 input logic rst;                                        //Active high logic
 input logic clk;                                        //Input clock
@@ -17,26 +17,34 @@ output logic [0:LENGTH-1] data;                         //This is the output wor
 
 //Internal signals
 logic feedback_bit;                                     //Input to the leftmost flip-flop
+logic [0:LENGTH-1] data_tmp;
 
-//Conditional compilation
-`define LFSR_Arch = TYPE;                               //Defining 
 //HDL code
+generate
+	if (TYPE==0)        			                            //Fibonacci LFSR
+	begin
+		//Shift register
+		always @(posedge clk or negedge rst)
+			if (!rst)
+					data<=seed;
+			else
+					data<={feedback_bit,data[0:LENGTH-2]};
 
-`ifdef (LFSR_Arch==0)                                   //Fibonacci LFSR
-begin
-    //Shift register
-    always @(posedge clk or negedge rst)
-        if (!rst)
-            data<=seed;
-        else
-            data<={feedback_bit,data[1:LENGTH-1]};
+		//Calculating the feedback bit
+		assign feedback_bit = ^(TAPS&data);
+	end
+else                                                   //Galois LFSR
+	begin
+	
+	assign data_tmp=(TAPS&{LENGTH{data[LENGTH-1]}})^(data);
+	
+	always @(posedge clk or negedge rst)
+		if (!rst)
+			data<=seed;
+		else
+			data<={data_tmp[15],data_tmp[0:14]};
+	end
+endgenerate
 
-    //Calculating the feedback bit
-    assign feedback_bit = ^(TAPS&data);
-end
-`else                                                   //Galois LFSR
-begin
-    assign data = 16'd15;
-end
 endmodule 
 
