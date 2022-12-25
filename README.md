@@ -22,12 +22,12 @@ The testbench comprises two maximum length LFSR cases (8-bit and 16-bit). The se
 The LFSR output words are written to a text file and plotted as a dynamic histogram to visualize the LFSR operation.
 
 1.	Maximum-length 8-bit Fibonacci LFSR  
-	**Two full cycles:**
-		![QuestaSim terminal window](./docs/8_bit_Fibonacci.gif) 
+	
+	![QuestaSim terminal window](./docs/8_bit_Fibonacci.gif) 
 
 2.	Maximum-length 8-bit Galois LFSR  
-	**Two full cycles:**
-		![QuestaSim terminal window](./docs/8_bit_Galois.gif) 
+	
+	![QuestaSim terminal window](./docs/8_bit_Galois.gif) 
 
 ## Support
 
