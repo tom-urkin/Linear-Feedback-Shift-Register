@@ -1,56 +1,33 @@
-# Synchronous FIFO Memory
+# Linear Feedback Shift Register (LFSR)
 
-> SystemVerilog Synchronous FIFO Memory  
+> SystemVerilog LFSR module   
 
-Implementention in SystemVerilog of __synchronous FIFO memory__.  
+Implementention in SystemVerilog of __Fibonacci and Galois LFSR__.  
 
 ## Get Started
 
 The source files  are located at the repository root:
 
-- [Synchronous_FIFO_TB](./Synchronous_FIFO_TB.sv)
-- [Synchronous_FIFO](./Synchronous_FIFO.sv)
+- [Linear Feedback Shift Register (LFSR)](./LFSR.sv)
+- [Linear Feedback Shift Register (LFSR) TB](./LFSR_TB.sv)
+
+## LFSR Architecture
+Modify the 'TYPE' parameter to select LFSR architecture type:
+-Fibonacci LFSR ('many-to-one') : TYPE = 0.
+-Galois LFSR ('one-to-many') : TYPE = 1.
 
 ## Testbench
 
-The testbench comprises three tests for a 32 8-bit word FIFO memory:
-1.	Writing random data to the FIFO memory until it is full  
+The testbench comprises two maximum length LFSR cases (8-bit and 16-bit). The seed in both cases is 'd1. The seed value and the tap locations can be changed via the parameters in the TB file. 
+The LFSR output words are written to a text file and plotted as a dynamic histogram to visualize the LFSR operation.
 
-	a.	Verify correctness of written data  
-	b.	Verify correctness of the FIFO memory full signal
-
+1.	Maximum-length 8-bit Fibonacci LFSR  
 	**QuestaSim terminal window:**
-		![QuestaSim terminal window](./docs/Write_test.JPG) 
+		![QuestaSim terminal window](./docs/8_bit_Fibonacci.gif) 
 
-	**QuestaSim wave window:**
-		![QuestaSim wave window](./docs/Write_test_wave.JPG)  
-	
-	
-2.	Reading from the FIFO memory until it is empty  
-
-	a.	Verify correctness of the read data  
-	b.	Verify correctness of the FIFO memory empty signal
-	
+2.	Maximum-length 8-bit Galois LFSR  
 	**QuestaSim terminal window:**
-		![QuestaSim terminal window](./docs/Read_test.JPG) 
-
-	**QuestaSim wave window:**
-		![QuestaSim wave window](./docs/Read_test_wave.JPG)  
-	
-3.	Continuous read-write operation with same frequency 
-
-	**QuestaSim terminal window:**
-		![QuestaSim terminal window](./docs/continious_test.JPG) 
-
-	**QuestaSim wave window:**
-		![QuestaSim wave window](./docs/continious_test_wave.JPG)  
-	
-
-
-
-### Possible Applications
-
-Implementation of the synchronous FIFO memory in a complete UART module can be found in the [following repository]((./Synchronous_FIFO.sv))
+		![QuestaSim terminal window](./docs/8_bit_Galois.gif) 
 
 ## Support
 
