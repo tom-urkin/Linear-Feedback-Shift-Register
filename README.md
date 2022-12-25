@@ -23,12 +23,10 @@ The LFSR output words are written to a text file and plotted as a dynamic histog
 
 1.	Maximum-length 8-bit Fibonacci LFSR  
 	**Two full cycles:**
-
 		![QuestaSim terminal window](./docs/8_bit_Fibonacci.gif) 
 
 2.	Maximum-length 8-bit Galois LFSR  
 	**Two full cycles:**
-	
 		![QuestaSim terminal window](./docs/8_bit_Galois.gif) 
 
 ## Support
