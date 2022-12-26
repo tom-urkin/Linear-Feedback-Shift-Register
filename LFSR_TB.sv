@@ -4,15 +4,15 @@ module LFSR_TB();
 //Parameter declarations
 parameter FIBONACCI = 0;
 parameter GALOIS = 1;
-parameter LENGTH = 8;                                 //Word width
-parameter EXTENDED = 1;
-parameter CONVENTIONAL = 0;
+parameter LENGTH = 8;                                   //Word width
+parameter EXTENDED = 1;	                                //Include all-zero state
+parameter CONVENTIONAL = 0;	                            //Conventional implementation (without the all-zero state)
 
-//parameter TAPS_FIBONACCI = 16'b0110100000000001;    //[0][1][2]----[15]. Use for 16-bit LFSR
-parameter TAPS_FIBONACCI = 8'b01110001;               //[0][1][2]----[7]. Use fir 8-bit LFSR
+//parameter TAPS_FIBONACCI = 16'b0110100000000001;      //[0][1][2]----[15]. Use for 16-bit LFSR
+parameter TAPS_FIBONACCI = 8'b01110001;                 //[0][1][2]----[7]. Use fir 8-bit LFSR
 
 //parameter TAPS_GALOIS =    16'b0110100000000000;      //[0][1][2]----[15]. Use for 16-bit LFSR
-parameter TAPS_GALOIS =    8'b01110000;       		  //[0][1][2]----[7]. Use for 8-bit LFSR
+parameter TAPS_GALOIS =    8'b01110000;                 //[0][1][2]----[7]. Use for 8-bit LFSR
 
 parameter CLK_PERIOD = 20;
 
@@ -21,7 +21,7 @@ parameter CLK_PERIOD = 20;
 logic clk;                                             //LFSR clock
 logic rst;                                             //Active high logic
 logic [0:LENGTH-1] data;                               //Output of the LFSR module
-logic enable;
+logic enable;                                          //LFSR enable signal
 logic previous_msb;
 
 //LFSR instantiation

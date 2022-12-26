@@ -11,18 +11,18 @@ parameter TAPS=16'b0110100000000001;                           //TAP locations. 
 input logic rst;                                               //Active high logic
 input logic clk;                                               //Input clock
 input logic [0:LENGTH-1] seed;                                 //Input seed - the initial state of the LFSR
-input logic enable;											   //Active high logic
+input logic enable;                                            //Active high logic
 integer k;
 //Outputs
 output logic [0:LENGTH-1] data;                                //Output word
-output logic previous_msb;									   //Used applications requireing previous value of the LFSR output data
+output logic previous_msb;                                     //Used applications requireing previous value of the LFSR output data
 //Internal signals
 logic feedback_bit;                                            //Input to the leftmost flip-flop (Fibonacci LFSR)
 logic [0:LENGTH-1] data_tmp;                                   //Right-most bit XORed with the data vector as a function of tap locations (Galois LFSR)
 
 //HDL code
 generate
-	if (TYPE==0)        			                           //Instantiate a Fibonacci LFSR
+	if (TYPE==0)                                               //Instantiate a Fibonacci LFSR
 	if (EXTEND==0)                                             //Cycle through 2^LENGTH-1 states
 	begin
 		//Shift register
@@ -35,7 +35,7 @@ generate
 		//Calculating the feedback bit
 		assign feedback_bit = ^(TAPS&data);
 	end
-	else
+	else                                                      //Cycle through 2^LENGTH-1 states
 	begin
 		//Shift register
 		always @(posedge clk or negedge rst)
