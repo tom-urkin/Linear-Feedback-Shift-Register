@@ -3,6 +3,7 @@
 > SystemVerilog LFSR module   
 
 Implementention in SystemVerilog of __Fibonacci and Galois LFSR__.  
+Principle of operation can be found in [Wikipedia](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) and [EE Times](https://www.eetimes.com/tutorial-linear-feedback-shift-registers-lfsrs-part-1/)
 
 ## Get Started
 
@@ -13,8 +14,8 @@ The source files  are located at the repository root:
 
 ## LFSR Architecture
 Modify the 'TYPE' parameter to select LFSR architecture type:
--Fibonacci LFSR ('many-to-one') : TYPE = 0.
--Galois LFSR ('one-to-many') : TYPE = 1.
+-Fibonacci LFSR ('many-to-one') : TYPE='0'.
+-Galois LFSR ('one-to-many') : TYPE='1'.
 
 ## Testbench
 
