@@ -1,6 +1,6 @@
 //Fibonacci ('many-to-one')/Galois ('one-to-many') Linear Feedback Shift Registers (LFSR)
 
-module LFSR(rst,clk,enable,seed,data);
+module LFSR(rst,clk,enable,seed,data,previous_msb);
 
 //Parameter declerations
 parameter TYPE = 0;                                            //LFSR type: 0 for Fibonacci and 1 for Galois. Deafault is Fibonacci LFSR.
@@ -15,7 +15,7 @@ input logic enable;											   //Active high logic
 integer k;
 //Outputs
 output logic [0:LENGTH-1] data;                                //Output word
-
+output logic previous_msb;									   //Used applications requireing previous value of the LFSR output data
 //Internal signals
 logic feedback_bit;                                            //Input to the leftmost flip-flop (Fibonacci LFSR)
 logic [0:LENGTH-1] data_tmp;                                   //Right-most bit XORed with the data vector as a function of tap locations (Galois LFSR)
@@ -40,9 +40,15 @@ generate
 		//Shift register
 		always @(posedge clk or negedge rst)
 			if (!rst)
+					begin
 					data<=seed;
+					previous_msb<=1'b0;
+					end
 			else if (enable)
+					begin
 					data<={feedback_bit,data[0:LENGTH-2]};
+					previous_msb<=data[LENGTH-1];
+					end
 
 		//Calculating the feedback bit
 		assign feedback_bit = ^({TAPS&data,~(|data[0:LENGTH-2])});         //Adding the all '0' state is carried by XORing the feedback bit and the NOR of data[0:LENGTH-2]
@@ -55,9 +61,15 @@ else                                                                      //Inst
 		//Shift register
 		always @(posedge clk or negedge rst)
 			if (!rst)
+				begin
 				data<=seed;
+				previous_msb<=1'b0;
+				end
 			else if (enable)
+				begin
 				data<={data_tmp[LENGTH-1],data_tmp[0:LENGTH-2]};
+				previous_msb<=data[LENGTH-1];
+				end
 	end
 endgenerate
 
