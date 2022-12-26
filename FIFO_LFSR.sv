@@ -32,39 +32,41 @@ always @(posedge clk or negedge rst)
         begin
             for (i=0; i<(2**ADDR_WIDTH); i=i+1)
                 mem[i]='d0;
-                wptr<=0;
+                //wptr<=0;
         end
     else
         if ((~FIFO_full)&&(wr_en))                            //Write operation
         begin
             mem[wptr[ADDR_WIDTH-1:0]]<=data_in;
-            wptr<=wptr+1;
+            //wptr<=wptr+1;
         end
 
 always @(posedge clk or negedge rst)
     if (!rst)
         begin
-            rptr<=0;
+            //rptr<=0;
             data_out<='d0;
         end
     else
         if ((~FIFO_empty)&&rd_en)                            //Read operation
             begin
                 data_out<=mem[rptr[ADDR_WIDTH-1:0]];
-                rptr<=rptr+1;
+                //rptr<=rptr+1;
             end
 
 //Instantiating read LFSR
 LFSR #(.TYPE(0), .EXTEND(1), LENGTH(5), TAPS(5'bXXX)) read_lfsr(.rst(rst),
                .clk(clk),
+			   .enable((~FIFO_empty)&&rd_en),
                .seed('d0),
                .data(rptr)
               );
 
 
 //Instantiating write LFSR
-LFSR write_lfsr(.rst(rst),
+LFSR #(.TYPE(0), .EXTEND(1), LENGTH(5), TAPS(5'bXXX)) write_lfsr(.rst(rst),
                .clk(clk),
+			   .enable((~FIFO_full)&&(wr_en)),
                .seed('d0),
                .data(wptr)
               );

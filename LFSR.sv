@@ -1,6 +1,6 @@
 //Fibonacci ('many-to-one')/Galois ('one-to-many') Linear Feedback Shift Registers (LFSR)
 
-module LFSR(rst,clk,seed,data);
+module LFSR(rst,clk,enable,seed,data);
 
 //Parameter declerations
 parameter TYPE = 0;                                            //LFSR type: 0 for Fibonacci and 1 for Galois. Deafault is Fibonacci LFSR.
@@ -11,6 +11,7 @@ parameter TAPS=16'b0110100000000001;                           //TAP locations. 
 input logic rst;                                               //Active high logic
 input logic clk;                                               //Input clock
 input logic [0:LENGTH-1] seed;                                 //Input seed - the initial state of the LFSR
+input logic enable;											   //Active high logic
 integer k;
 //Outputs
 output logic [0:LENGTH-1] data;                                //Output word
@@ -28,7 +29,7 @@ generate
 		always @(posedge clk or negedge rst)
 			if (!rst)
 					data<=seed;
-			else
+			else if (enable)
 					data<={feedback_bit,data[0:LENGTH-2]};
 
 		//Calculating the feedback bit
@@ -40,7 +41,7 @@ generate
 		always @(posedge clk or negedge rst)
 			if (!rst)
 					data<=seed;
-			else
+			else if (enable)
 					data<={feedback_bit,data[0:LENGTH-2]};
 
 		//Calculating the feedback bit
@@ -55,7 +56,7 @@ else                                                                      //Inst
 		always @(posedge clk or negedge rst)
 			if (!rst)
 				data<=seed;
-			else
+			else if (enable)
 				data<={data_tmp[LENGTH-1],data_tmp[0:LENGTH-2]};
 	end
 endgenerate

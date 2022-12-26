@@ -5,8 +5,6 @@ module LFSR_TB();
 parameter FIBONACCI = 0;
 parameter GALOIS = 1;
 parameter LENGTH = 8;                                 //Word width
-parameter EXTEND = 1;
-parameter CONVENTIONAL = 0;
 
 //parameter TAPS_FIBONACCI = 16'b0110100000000001;    //[0][1][2]----[15]. Use for 16-bit LFSR
 parameter TAPS_FIBONACCI = 8'b01110001;               //[0][1][2]----[7]. Use fir 8-bit LFSR
@@ -21,12 +19,10 @@ parameter CLK_PERIOD = 20;
 logic clk;                                             //LFSR clock
 logic rst;                                             //Active high logic
 logic [0:LENGTH-1] data;                               //Output of the LFSR module
-logic enable;
 
 //LFSR instantiation
-LFSR #(.LENGTH(LENGTH), .TAPS(TAPS_FIBONACCI), .TYPE(FIBONACCI), .EXTEND(CONVENTIONAL)) U1(
+LFSR #(.LENGTH(LENGTH), .TAPS(TAPS_FIBONACCI), .TYPE(FIBONACCI)) U1(
                 .clk(clk),
-				.enable(enable),
                 .rst(rst),
                 .seed(8'd1),
 				.data(data)
@@ -37,12 +33,9 @@ initial
 begin
     rst=1'b0;
     clk=1'b0;
-	enable=1'b0;
     @(posedge clk);
     rst=1'b1;
-	repeat (50)
-	@(posedge clk)
-	enable=1'b1; 
+
 	repeat (100000)
     @(posedge clk);
 	$finish;
