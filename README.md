@@ -17,17 +17,18 @@ The source files  are located at the repository root:
 Modify the 'TYPE' parameter to select LFSR architecture type:
 - Fibonacci LFSR ('many-to-one') : TYPE='0'.
 - Galois LFSR ('one-to-many') : TYPE='1'.
+- Extending number of possible states in the Fibonacci architecture : EXTEND='1'.
 
 ## Testbench
 
 The testbench comprises two maximum length LFSR cases (8-bit and 16-bit). The seed in both cases is 'd1. The seed value and the tap locations can be changed via the parameters in the TB file. 
 The LFSR output words are written to a text file and plotted as a dynamic histogram to visualize the LFSR operation.
 
-1.	Maximum-length 8-bit Fibonacci LFSR  
+1.	Maximum-length 8-bit conventional Fibonacci LFSR  (2^n-1 states)
 	
 	![8_bit_Fibonacci_LFSR](./docs/8_bit_Fibonacci.gif) 
 
-2.	Maximum-length 8-bit Galois LFSR  
+2.	Maximum-length 8-bit Galois LFSR  (2^n-1 states)
 	
 	![8_bit_Galios_LFSR](./docs/8_bit_Galois.gif) 
 
