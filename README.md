@@ -3,7 +3,8 @@
 > SystemVerilog LFSR module   
 
 Implementention in SystemVerilog of __Fibonacci and Galois LFSR__.  
-Principle of operation can be found in [Wikipedia](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) and [EE Times](https://www.eetimes.com/tutorial-linear-feedback-shift-registers-lfsrs-part-1/)
+
+Principle of operation and tap locations for maximum length realizations can be found in [Wikipedia](https://en.wikipedia.org/wiki/Linear-feedback_shift_register) and [EE Times](https://www.eetimes.com/tutorial-linear-feedback-shift-registers-lfsrs-part-1/).
 
 ## Get Started
 
@@ -24,11 +25,11 @@ The LFSR output words are written to a text file and plotted as a dynamic histog
 
 1.	Maximum-length 8-bit Fibonacci LFSR  
 	
-	![QuestaSim terminal window](./docs/8_bit_Fibonacci.gif) 
+	![8_bit_Fibonacci_LFSR(./docs/8_bit_Fibonacci.gif) 
 
 2.	Maximum-length 8-bit Galois LFSR  
 	
-	![QuestaSim terminal window](./docs/8_bit_Galois.gif) 
+	![8_bit_Galios_LFSR](./docs/8_bit_Galois.gif) 
 
 ## Support
 
