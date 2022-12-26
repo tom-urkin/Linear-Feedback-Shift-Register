@@ -15,8 +15,8 @@ The source files  are located at the repository root:
 
 ## LFSR Architecture
 Modify the 'TYPE' parameter to select LFSR architecture type:
--Fibonacci LFSR ('many-to-one') : TYPE='0'.
--Galois LFSR ('one-to-many') : TYPE='1'.
+- Fibonacci LFSR ('many-to-one') : TYPE='0'.
+- Galois LFSR ('one-to-many') : TYPE='1'.
 
 ## Testbench
 
