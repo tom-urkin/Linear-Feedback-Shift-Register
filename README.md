@@ -25,7 +25,7 @@ The LFSR output words are written to a text file and plotted as a dynamic histog
 
 1.	Maximum-length 8-bit Fibonacci LFSR  
 	
-	![8_bit_Fibonacci_LFSR(./docs/8_bit_Fibonacci.gif) 
+	![8_bit_Fibonacci_LFSR](./docs/8_bit_Fibonacci.gif) 
 
 2.	Maximum-length 8-bit Galois LFSR  
 	
