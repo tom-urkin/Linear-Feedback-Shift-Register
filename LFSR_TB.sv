@@ -22,16 +22,16 @@ logic clk;                                             //LFSR clock
 logic rst;                                             //Active high logic
 logic [0:LENGTH-1] data;                               //Output of the LFSR module
 logic enable;                                          //LFSR enable signal
-logic previous_msb;
+logic previous_msb;                                    //Rightmost bit of the previous state
 
 //LFSR instantiation
 LFSR #(.LENGTH(LENGTH), .TAPS(TAPS_FIBONACCI), .TYPE(FIBONACCI), .EXTEND(CONVENTIONAL)) U1(
                 .clk(clk),
-				.enable(enable),
+                .enable(enable),
                 .rst(rst),
                 .seed(8'd1),
-				.data(data),
-				.previous_msb(previous_msb)
+                .data(data),
+                .previous_msb(previous_msb)
                 );
 
 //Initial blocks
