@@ -21,8 +21,9 @@ Modify the 'TYPE' parameter to select LFSR architecture type:
 
 ## Testbench
 
-The testbench comprises two maximum length LFSR cases (8-bit and 16-bit). The seed in both cases is 'd1. The seed value and the tap locations can be changed via the parameters in the TB file. 
-The LFSR output words are written to a text file and plotted as a dynamic histogram to visualize the LFSR operation.
+-The testbench comprises two maximum length LFSR cases (8-bit and 16-bit).
+-The seed in both cases is 'd1. The seed value and the tap locations can be changed via the parameters in the TB file. 
+-The LFSR output words are manually extracted from QuestaSim to a text file and plotted as a dynamic histogram to visualize the LFSR operation as follows:
 
 1.	Maximum-length 8-bit conventional Fibonacci LFSR  (2^n-1 states)
 	
