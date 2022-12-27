@@ -29,7 +29,7 @@ Modify the 'TYPE' parameter to select LFSR architecture type:
 	
 	![8_bit_Fibonacci_LFSR](./docs/8_bit_Fibonacci.gif) 
 
-2.	Maximum-length 8-bit Galois LFSR ($(2^n-1)$ states)
+2.	Maximum-length 8-bit Galois LFSR ( $(2^n-1)$ states)
 	
 	![8_bit_Galios_LFSR](./docs/8_bit_Galois.gif) 
 
